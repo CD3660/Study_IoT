@@ -2,24 +2,18 @@
 #include <SoftwareSerial.h>
 SoftwareSerial bluetooth(10 , 11); // RX:11, TX:10 => 연결 반대로
 
-int livingRoomLight = 5;
-int gasLight = 6;
+int livingRoomLight = 2;
+int gasLight = 3;
 
 int isLRLight = 0;
 int isGasLight = 0;
 
 void setup() {
-  Serial.begin(9600);
-  while (!Serial) {
-    ; // wait for serial port to connect. Needed for native USB port only
-  }
-  Serial.println("Serial Conn!");
+  Serial.begin(9600);  
   bluetooth.begin(9600);
   
   pinMode(livingRoomLight, OUTPUT);   
   pinMode(gasLight, OUTPUT); 
-  pinMode(7, OUTPUT);   
-
 }
 
 char android;
@@ -34,41 +28,38 @@ void loop() {
       
       Serial.println(android);
 
-      if(android == 'a'){
-    
-        // 불 켜진건가 꺼진건가 물어보기
+      if(android == 'a'){    
+        // 불 켜진건가 꺼진건가 물어보기        
+        Serial.println("거실등여부시작");
+        //거실 전원 ON, OFF여부
+        int isLRLight = digitalRead(livingRoomLight);
+        Serial.println(isLRLight);
+        if(isLRLight == LOW){
+          Serial.println('b'); // 거실전원 꺼진상태
+          bluetooth.println('b');
+          delay(500);
+        }else{
+          Serial.println('c'); // 거실전원 켜진상태
+          bluetooth.println('c');
+          delay(500);
+        }        
+      }
+  
+      if (android == 'd') { 
+        Serial.println("가스여부시작");
+        //가스 전원 ON, OFF여부
+        int isGasLight = digitalRead(gasLight);
+        if(isGasLight == LOW){
+          Serial.print('e'); // 가스 전원 꺼진상태
+          bluetooth.println('e');
+          delay(500);
+        }else{
+          Serial.print('f'); // 가스 전원 켜진상태
+          bluetooth.println('f');
+          delay(500);
+        }
         
-            Serial.println("거실등여부시작");
-            //거실 전원 ON, OFF여부
-            int isLRLight = digitalRead(livingRoomLight);
-            Serial.println(isLRLight);
-            if(isLRLight == LOW){
-              Serial.println('b'); // 거실전원 꺼진상태
-              bluetooth.println('b');
-              delay(500);
-            }else{
-              Serial.println('c'); // 거실전원 켜진상태
-              bluetooth.println('c');
-              delay(500);
-            }        
-        }
-    
-        if (android == 'd') {      
-          
-            Serial.println("가스여부시작");
-            //가스 전원 ON, OFF여부
-            int isGasLight = digitalRead(gasLight);
-            if(isGasLight == LOW){
-              Serial.print('e'); // 가스 전원 꺼진상태
-              bluetooth.println('e');
-              delay(500);
-            }else{
-              Serial.print('f'); // 가스 전원 켜진상태
-              bluetooth.println('f');
-              delay(500);
-            }
-          
-        }
+      }
       
       
       // 불켜고 끄기
