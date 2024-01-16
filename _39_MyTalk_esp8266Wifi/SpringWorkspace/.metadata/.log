@@ -1035,3 +1035,15 @@ This warning can be switched off on the Team > Git > Confirmations and Warnings 
 
 !ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2024-01-15 09:55:23.565
 !MESSAGE executing callback sts4.classpath.xyNFtgDx SUCCESS [done]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2024-01-15 17:27:01.013
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.xyNFtgDx
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2024-01-15 17:27:01.014
+!MESSAGE unsubscribing from classpath changes: sts4.classpath.xyNFtgDx
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2024-01-15 17:27:01.015
+!MESSAGE subsribers = {}
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2024-01-15 17:27:01.015
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.xyNFtgDx => OK
